@@ -81,6 +81,9 @@ const speak = (text) => {
   utterance.onstart = () => {
     console.log('speaking start')
   }
+  utterance.onboundary = (event) => {
+    currentIndex.value = event.charIndex
+  }
 
   utterance.onerror = (e) => {
     console.log('speech error', e)
