@@ -69,13 +69,21 @@ watch(msg, (newValue) => {
 
 
 const speak = (text) => {
+  if (!window.speechSynthesis) return
+
   speechSynthesis.cancel()
 
   const utterance = new SpeechSynthesisUtterance(text)
+
   utterance.lang = 'ja-JP'
-  utterance.rate = 1.2 // 話すスピード
-  utterance.onboundary = (event) => {
-    currentIndex.value = event.charIndex
+  utterance.rate = 1.1
+
+  utterance.onstart = () => {
+    console.log('speaking start')
+  }
+
+  utterance.onerror = (e) => {
+    console.log('speech error', e)
   }
 
   speechSynthesis.speak(utterance)
