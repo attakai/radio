@@ -35,8 +35,7 @@ const locate = () => {
           )
 
           resolve(
-            res.address.city +
-            res.address.suburb
+            res.display_name
           )
 
         } catch (e) {
