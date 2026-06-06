@@ -17,7 +17,7 @@ const interest = ref('')
 const isOpen = ref(false)
 const startRadio = async () => {
   place.value = await locate()
-  await callApi(place.value)
+  await callApi(place.value, interest.value)
 }
 const locate = () => {
   return new Promise((resolve, reject) => {
@@ -50,12 +50,12 @@ const locate = () => {
   })
 }
 
-const callApi = async (place) => {
+const callApi = async (place, interst) => {
   const data = await $fetch('/api/radio', {
     method: 'POST',
     body: {
       place,
-      interest: '',
+      interest: interst,
       mode: 'radio'
     }
   })
