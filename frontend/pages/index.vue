@@ -1,16 +1,19 @@
 <template lang="pug">
+.wrapper
   .wrap
     button.start(@click="startRadio") ラジオを聴く
     button.stop(@click="stop") 読み上げを停止
   .place 現在地 {{ place }}
   .subtitle(@click="isOpen = !isOpen" :class="{ open: isOpen }")
     span.read {{ readText }}
-    span.unread {{ unreadText || '今いる場所の雑学を聞いてみましょう。' }}
+    span.unread {{ unreadText || '待機中...' }}
+  input.interest(v-model="interest" placeholder="興味のある話題はなんですか？例）地域の伝説")
 </template>
 
 <script setup>
 const msg = ref('')
 const place = ref('')
+const interest = ref('')
 const isOpen = ref(false)
 const startRadio = async () => {
   place.value = await locate()
@@ -129,6 +132,22 @@ h2
   align-items center
   gap 16px
   margin-top 10%
+.wrapper
+  display flex
+  flex-flow column nowrap
+  align-items center
+  padding 0 24px
+.interest
+  width 100%
+  display block
+  padding 24px
+  font-size 14px
+  box-sizing border-box
+  border-radius 8px
+  border 0
+  box-shadow 0 0 16px rgba(10, 100, 250, .2)
+  &::placeholder
+    color #ccc
 .start
   width 280px
   height 280px
@@ -139,9 +158,8 @@ h2
   font-size 32px
   font-weight bold
   cursor pointer
-  box-shadow 0 16px 40px rgba(79,140,255,.25)
+  box-shadow 0 0px 40px rgba(79,140,255,.6)
   transition transform .2s ease
-
   &:active
     transform scale(.96)
 
@@ -154,19 +172,13 @@ h2
 .place
   max-width 700px
   margin 32px auto 0
-  padding 0 24px
   font-size 14px
   color #777
   text-align center
 
 .subtitle
   max-width 700px
-  margin 24px 5%
-  padding 24px
-  background rgba(255,255,255,.8)
-  backdrop-filter blur(16px)
-  border-radius 24px
-  box-shadow 0 8px 32px rgba(0,0,0,.08)
+  margin 24px 0
 
   display -webkit-box
   -webkit-box-orient vertical
@@ -178,27 +190,14 @@ h2
 
   line-height 1.8
   font-size 18px
-
+  width 100%
+  box-sizing border-box
   transition all .3s ease
 
   .read
     color #4f8cff
   .unread
     color #aaa
-  &::after
-    content ""
-    position absolute
-    left 0
-    right 0
-    bottom 0
-    height 80px
-
-    background linear-gradient(
-      rgba(255,255,255,0),
-      rgba(255,255,255,1)
-    )
-
-    transition opacity .3s ease
 
   &.open
     -webkit-line-clamp unset
