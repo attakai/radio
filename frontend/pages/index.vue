@@ -53,7 +53,7 @@ const callApi = async (place) => {
     method: 'POST',
     body: {
       place,
-      interest: '地名の由来',
+      interest: '',
       mode: 'radio'
     }
   })

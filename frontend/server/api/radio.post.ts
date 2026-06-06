@@ -38,12 +38,11 @@ export default defineEventHandler(async (event) => {
               - 観光案内ではなく雑学
               - 2〜3分の内容
               - 少し雑で面白く
-              - 地名の違和感から話を始める
               `
-                          },
-                          {
-                            role: 'user',
-                            content: `
+            },
+            {
+              role: 'user',
+              content: `
               現在地: ${place}
               興味: ${interest}
               モード: ${mode}
