@@ -140,12 +140,13 @@ h2
 .interest
   width 100%
   display block
-  padding 24px
+  padding 24px 16px
   font-size 14px
   box-sizing border-box
   border-radius 8px
   border 0
   box-shadow 0 0 16px rgba(10, 100, 250, .2)
+  color #666
   &::placeholder
     color #ccc
 .start
